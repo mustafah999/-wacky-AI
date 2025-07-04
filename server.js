@@ -5,12 +5,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-    const htmlPath = path.join(__dirname, 'private_code', 'index.html');
-    const cssPath = path.join(__dirname, 'private_code', 'style.css');
-    const jsPath = path.join(__dirname, 'private_code', 'script.js');
+    // تم حذف 'private_code' من هنا
+    const htmlPath = path.join(__dirname, 'index.html');
+    const cssPath = path.join(__dirname, 'style.css');
+    const jsPath = path.join(__dirname, 'script.js');
 
     let html = fs.readFileSync(htmlPath, 'utf8');
-
+    
     if (fs.existsSync(cssPath)) {
         const css = fs.readFileSync(cssPath, 'utf8');
         html = html.replace('</head>', `<style>${css}</style></head>`);
@@ -20,7 +21,7 @@ app.get('/', (req, res) => {
         const js = fs.readFileSync(jsPath, 'utf8');
         html = html.replace('</body>', `<script>${js}</script></body>`);
     }
-
+    
     res.send(html);
 });
 
